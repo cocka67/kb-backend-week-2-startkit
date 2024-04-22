@@ -1,10 +1,10 @@
 // ...импорты и настройки
 const http = require('http');
 
-const  mainRouteController  = require('./controllers/main');
-const  defaultRouteController  = require('./controllers/default');
-const  voteRouteController  = require('./controllers/vote');
-const  gameRouteController  = require('./controllers/game');
+const {defaultRouteController,
+    gameRouteController,
+    mainRouteController,
+    voteRouteController} = require('./controllers');
 
 
 const server = http.createServer((req, res) => {
@@ -13,12 +13,11 @@ const server = http.createServer((req, res) => {
         case "/":
             mainRouteController(res, "/index.html", ".html");
             break;
-        // ...другие маршруты
-        case "/vote":
-            voteRouteController(req, res);
-            break;
         case "/game":
             gameRouteController(res);
+            break;
+        case "/vote":
+            voteRouteController(req, res);
             break;
         default:
             defaultRouteController(res, url);

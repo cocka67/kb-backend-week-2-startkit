@@ -1,10 +1,11 @@
-const staticFile = require("../appModules/http-utils/static-file");
+const { staticFile } = require("../appModules/http-utils");
 const { getData, endpoints } = require("../appModules/api");
-const { config, makeRatingFile } = require("../rating");
+const { config, makeRatingFile } = require("../appModules/rating");
 
 async function mainRouteController(res, publicUrl, extname) {
     const data = await getData(endpoints.games)
     await makeRatingFile(config.PATH_TO_PATING_FILE, data)
+    console.log(data)
     res.statusCode = 200;
     staticFile(res, publicUrl, extname);
   }
